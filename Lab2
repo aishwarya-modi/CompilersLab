@@ -1,0 +1,23 @@
+%{ 
+#include <stdio.h>
+#include <string.h>
+char word[30];
+int wordlength=0;
+%} 
+  
+%% 
+[a-zA-Z]+ {printf("%d\t",yyleng);
+	if(yyleng>wordlength){ 
+		wordlength=yyleng;
+		strcpy(word,yytext);
+		}
+	}
+%%
+int yywrap(){
+return 1;
+} 
+main() { 
+  printf("enter string\n"); 
+  yylex();  
+  printf("longest word \"%s\" of length %d",word,wordlength);
+} 
